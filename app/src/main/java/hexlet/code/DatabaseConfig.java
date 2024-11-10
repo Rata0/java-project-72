@@ -17,8 +17,6 @@ public class DatabaseConfig {
 
             String jdbcUrl = getJdbcUrl();
             config.setJdbcUrl(jdbcUrl);
-            config.setUsername("postgres");
-            config.setPassword("12345");
 
             hikariDataSource = new HikariDataSource(config);
             createSchema();
@@ -27,7 +25,7 @@ public class DatabaseConfig {
     }
 
     private static String getJdbcUrl() {
-        return System.getenv().getOrDefault("JDBC_DATABASE_URL", "jdbc:h2:mem:Url;DB_CLOSE_DELAY=-1");
+        return System.getenv().getOrDefault("JDBC_DATABASE_URL", "jdbc:h2:mem:project");
     }
 
     private static void createSchema() {
