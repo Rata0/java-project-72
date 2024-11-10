@@ -18,13 +18,6 @@ public class DatabaseConfig {
             String jdbcUrl = getJdbcUrl();
             config.setJdbcUrl(jdbcUrl);
 
-            try {
-                Class.forName("org.postgresql.Driver");
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-                throw new RuntimeException("PostgreSQL Driver not found.");
-            }
-
             hikariDataSource = new HikariDataSource(config);
             createSchema();
         }
