@@ -23,5 +23,7 @@ public class App {
 
         Url newUrl = new Url("http://example.com");
         urlRepository.addUrl(newUrl);
+
+        getApp().start();
     }
 }
