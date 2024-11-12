@@ -1,6 +1,9 @@
 package hexlet.code;
 
+import hexlet.code.controller.UrlController;
 import hexlet.code.model.Url;
+import hexlet.code.repository.UrlRepository;
+import hexlet.code.util.NamedRoutes;
 import io.javalin.Javalin;
 import io.javalin.rendering.template.JavalinJte;
 
@@ -8,21 +11,22 @@ import gg.jte.ContentType;
 import gg.jte.TemplateEngine;
 import gg.jte.resolve.ResourceCodeResolver;
 import lombok.extern.slf4j.Slf4j;
-import util.NamedRoutes;
+
 
 import javax.sql.DataSource;
+import java.sql.SQLException;
 
 @Slf4j
 public class App {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         DataSource dataSource = DatabaseConfig.getDataSource();
 
         UrlRepository urlRepository = new UrlRepository(dataSource);
 
         Url newUrl = new Url("http://example.com");
-        urlRepository.addUrl(newUrl);
-
+        UrlRepository.save(newUrl);
+        urlRepository.find("http://example.com");
         getApp().start();
     }
 
@@ -36,6 +40,8 @@ public class App {
             ctx.render("index.jte");
             log.info("Обрабокта пути " + NamedRoutes.rootPath());
         });
+
+        app.post(NamedRoutes.urlsPath(), UrlController::create);
 
         return app;
     }

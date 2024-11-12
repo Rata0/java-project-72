@@ -1,11 +1,11 @@
-package hexlet.code;
+package hexlet.code.repository;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
 
 public abstract class BaseRepository {
-    protected DataSource dataSource;
+    protected static DataSource dataSource;
 
     public BaseRepository(DataSource dataSource) {
         this.dataSource = dataSource;
