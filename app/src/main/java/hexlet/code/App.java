@@ -8,6 +8,7 @@ import gg.jte.ContentType;
 import gg.jte.TemplateEngine;
 import gg.jte.resolve.ResourceCodeResolver;
 import lombok.extern.slf4j.Slf4j;
+import util.NamedRoutes;
 
 import javax.sql.DataSource;
 
@@ -31,9 +32,9 @@ public class App {
             config.fileRenderer(new JavalinJte(createTemplateEngine()));
         });
 
-        app.get("/", ctx -> {
+        app.get(NamedRoutes.rootPath(), ctx -> {
             ctx.render("index.jte");
-            log.info("Обрабокта пути /");
+            log.info("Обрабокта пути " + NamedRoutes.rootPath());
         });
 
         return app;
