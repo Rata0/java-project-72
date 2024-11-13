@@ -1,5 +1,8 @@
-<!DOCTYPE html>
-<html>
+@import hexlet.code.util.NamedRoutes
+@import hexlet.code.dto.BasePage
+@import gg.jte.Content
+@param Content content
+@param BasePage page = null
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -17,8 +20,8 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <div class="navbar-nav">
-          <a class="nav-link" href="/">Главная</a>
-          <a class="nav-link" href="/urls">Сайты</a>
+          <a class="nav-link" href="${NamedRoutes.rootPath()}">Главная</a>
+          <a class="nav-link" href="${NamedRoutes.urlsPath()}">Сайты</a>
         </div>
       </div>
     </div>
@@ -63,5 +66,5 @@
     </div>
   </footer>
 </body>
-
+{content}
 </html>

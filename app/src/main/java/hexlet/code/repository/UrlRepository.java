@@ -2,15 +2,9 @@ package hexlet.code.repository;
 
 import hexlet.code.model.Url;
 
-import javax.sql.DataSource;
 import java.sql.*;
-import java.util.Optional;
 
 public class UrlRepository extends BaseRepository {
-    public UrlRepository(DataSource dataSource) {
-        super(dataSource);
-    }
-
     public static void save(Url url) throws SQLException {
         String sql = "INSERT INTO urls (name, created_at) VALUES (?, ?)";
 
@@ -26,7 +20,7 @@ public class UrlRepository extends BaseRepository {
         }
     }
 
-    public static Optional<Url> find(String name) throws SQLException {
+    public static boolean find(String name) throws SQLException {
         String sql = "SELECT * FROM urls WHERE name = ?";
         try (Connection conn = dataSource.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -34,9 +28,11 @@ public class UrlRepository extends BaseRepository {
             stmt.setString(1, name);
             ResultSet resultSet = stmt.executeQuery();
             if (resultSet.next()) {
-                return Optional.of(createUrlFromResultSet(resultSet));
+                System.out.println("Найден");
+                return true;
             }
-            return Optional.empty();
+            System.out.println("Не найден");
+            return false;
         }
     }
 
