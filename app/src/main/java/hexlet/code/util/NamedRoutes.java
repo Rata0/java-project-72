@@ -9,7 +9,6 @@ public class NamedRoutes {
         return "/urls";
     }
 
-    // Это нужно, чтобы не преобразовывать типы снаружи
     public static String coursePath(Long id) {
         return coursePath(String.valueOf(id));
     }
